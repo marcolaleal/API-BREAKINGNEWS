@@ -4,7 +4,7 @@ const connectDatabase = () => {
     console.log("Conectando ao banco de dados...");
 
     mongoose.connect(
-        "mongodb+srv://root:root@breackingnews.xtinu1r.mongodb.net/?retryWrites=true&w=majority",
+        process.env.MONGODB_URI,
         { useNewUrlParser: true, useUnifiedTopology: true }
     )
     .then(() => console.log("MongoDB Atlas Conectado com Sucesso!"))
