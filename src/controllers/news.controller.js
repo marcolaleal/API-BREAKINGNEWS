@@ -1,5 +1,5 @@
 import {createService, findAllService} from '../services/news.service.js';
-
+import { ObjectId } from 'mongoose';
 
 const create = async (req,res) => {
     try {
@@ -13,7 +13,7 @@ const create = async (req,res) => {
             title,
             text,
             banner,
-            id: "objectIdFake01",
+            user: {_id: "6414335b243b8db2aa3e3d46"},
         });
         
         res.send(201);
@@ -25,9 +25,14 @@ const create = async (req,res) => {
 
 };
 
-const findAll = (req,res) => {
-    const news = [];
+const findAll = async (req,res) => {
+    const news = await findAllService();
+
+    if (news.length === 0) {
+        return res.status(400).send({message: "Não há usuarios cadastrados"})
+    }
+
     res.send(news);
 };
 
-export default { create, findAll};
+export { create, findAll};
