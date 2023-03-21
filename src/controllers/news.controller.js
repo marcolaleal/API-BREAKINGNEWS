@@ -1,9 +1,11 @@
 import {createService, findAllService} from '../services/news.service.js';
-import { ObjectId } from 'mongoose';
 
 const create = async (req,res) => {
+
     try {
+        
         const { title, text, banner } = req.body;
+
         
         if(!title || !text || !banner) {
             res.status(400).send({message: "Envie todos os campos para publicar uma Noticia"});    
@@ -13,7 +15,7 @@ const create = async (req,res) => {
             title,
             text,
             banner,
-            user: {_id: "6414335b243b8db2aa3e3d46"},
+            user: req.userId,
         });
         
         res.send(201);
